@@ -10,8 +10,8 @@ class TurnUserAdminUseCase {
 
   execute({ user_id }: IRequest): User {
     const userAlreadyExists = this.usersRepository.findById(user_id);
-    if (userAlreadyExists) {
-      throw new Error("User already exists!");
+    if (!userAlreadyExists) {
+      throw new Error("User not exists!");
     }
     const userSettedAsAdmin = this.usersRepository.turnAdmin(userAlreadyExists);
 
